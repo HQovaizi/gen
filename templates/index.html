@@ -1,0 +1,51 @@
+<form id="formId" hx-swap="outerHTML settle:2s">
+
+    <!-- main container -->
+    <div class ="conainer mx-auto p-5 mainContainerClass">
+
+        <!-- search frequently used prompts -->
+        <button class="btn btn-warning" for="modalSearch" hx-get="/search" hx-target="#modalSearchId">Search Frequently Used Prompts</button>
+        <div id="modalSearchId"></div>
+
+        <!-- prompt container -->
+        <div class="container mx-auto px-auto promptContainerClass">
+            <div class="grid grid-cols-2 gap-3">
+
+                <!-- prompt -->
+                <div class="promptClass">
+                    <button class="btn btn-accent" hx-post="/getResponse" hx-target="#formId">Generate User Prompt</button>
+                    <br>
+                    <textarea class="textArea textArea-success" id="promptId" name="promptId" placeholder="User Prompt" rows="15" cols="50">{{ prompt }}</textarea>
+                    <br>
+
+                    <!-- initialize DB -->
+                    <button class="btn btn-outline btn-primary" hx-post="/resetDB" hx-target="#toastId">Reset DB</button>
+                    <button class="btn btn-outline btn-primary" hx-post="/dbDetails" hx-target="#formId">DB Details</button>
+                    <button class="btn btn-outline btn-primary" hx-post="/addPrompts" hx-target="#toastId">Add Prompts</button>
+                    <br>
+                    <span id="toastId"></span>
+                </div>
+
+                <!-- response -->
+                <div class="responseClass">
+                    <button class="btn btn-primary" hx-post="/getResponse" hx-target="#formId">Generate AI Response</button>
+                    <br>
+                    <textarea class="textArea textArea-success" id="responseId" name="responseId" placeholder="AI Response" rows="15" cols="50">{{ response }}</textarea>
+                    <br>
+                    
+                    <!-- database -->
+                    <button class="btn btn-success" hx-post="/save" hx-target="#toastId">Save</button>
+                    <button class="btn btn-primary" for="modalLoad" hx-get="/load" hx-target="#modalLoadId">Load</button>
+                    <br>
+                    
+
+                    <div id="modalLoadId"></div>
+                    
+                </div>
+
+            </div>
+        </div>
+
+    </div> <!-- main container -->
+
+</form>

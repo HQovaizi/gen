@@ -1,0 +1,24 @@
+<div id="modalSearchId">
+    
+    <input type="checkbox" id="modalSearch" class="modal-toggle" checked/>
+
+    <div class="modal" role="dialog">
+
+        <!-- modal box -->
+        <div class="modal-box w-11/12 max-w-6xl" style="overflow:auto;">
+            <label class="input input-bordered flex items-center gap-2">
+                <input type="text" class="grow" placeholder="Search" />
+            </label><br>
+
+            <h3 class="text-lg font-bold">Search Frequently Used Prompts:</h3><br>
+            <div class="flex flex-col w-full">
+                {% for result in results %}
+                    <button class="btn btn-outline" hx-get="/search/{{ loop.index }}" hx-target="#formId">{{ result|e }}</button>
+                {% endfor %}
+            </div>
+        </div>
+        <label class="modal-backdrop" for="modalSearch">Close</label>
+
+    </div>
+
+</div>
