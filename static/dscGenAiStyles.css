@@ -1,26 +1,74 @@
 body {
-    background-color: rgb(232,238,239);
+    font-weight: bold;
+    /* color: black; */
+    background-color: rgb(224, 234, 235);
 }
 
 .banner {
     width: 100%;
 }
 
+.centerClass {
+    text-align: center;
+}
+
+.leftClass {
+    text-align: left;
+}
+
 .mainContainerClass {
-    border: 2px solid rgb(100,0,0)
+    width: 100%;
+    /* border: 2px solid #640000 */
 }
 
-.promptContainerClass {
+.containerClass {
+    height: 325px;
+    background-color: #dfe7e7;
+    overflow: auto;
+    border-radius: 15px;
+    border: 2px solid hwb(193 44% 24%);
+}
+
+.inputClass {
+    color: black;
+}
+
+.gridConditionsClass {
+    height: 180;
+    /* border: 3px solid rgb(113,177,194); */
+    /* overflow: auto; */
+    /* border-radius: 15px; */
+}
+
+.containerConditionsClass {
+    width: 175px;
+    height: 170px;
+    /* border: 3px solid rgb(113,177,194); */
+    /* overflow: auto; */
+    /* border-radius: 15px; */
+}
+
+.textAreaClass {
+    font-size: 18px;
+    resize: none;
+    overflow: scroll;
+    background-color: #ffffff;
+    /* overflow: auto; */
+    /* border-radius: 15px; */
+    /* border: 3px solid rgb(113,177,194); */
+}
+
+/* .promptContainerClass {
     border: 2px solid rgb(0,100,0)
-}
+} */
 
-.promptClass {
+/* .promptClass {
     border: 2px solid rgb(0,150,0)
-}
+} */
 
-.responseClass {
+/* .responseClass {
     border: 2px solid rgb(0,200,0)
-}
+} */
 
 #toastId.htmx-settling {
     opacity: 100;
@@ -28,7 +76,7 @@ body {
 
 #toastId {
     color: black;
-    background: #8be662;
+    background: #7ecd59;
     opacity: 0;
     transition: opacity 2s ease;
 }

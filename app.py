@@ -41,7 +41,6 @@ def addPrompts():
 
     return render_template('toast.html', toast="Frequently Used Prompts Added Successfully")
 
-
 @app.route('/search', methods=['GET'])
 def search():
     print('SEARCH')
@@ -89,19 +88,41 @@ def searchItem(id):
 
     return render_template('index.html', prompt=searchedItem, response="")
 
+@app.route('/edit/<selection>', methods=['POST'])
+def edit(selection):
+    prompt = request.form['promptId']
+    updatedPrompt = str(prompt) + " " + str(selection)
+    return render_template('index.html', prompt=updatedPrompt)
+
+@app.route('/getEnrichedPrompt', methods=['POST'])
+def getEnrichedPrompt():
+    print("GET ENRICHED PROMPT")
+
+    prompt = request.form['promptId']
+    print(prompt)
+
+    if (prompt == None):
+        return render_template('index.html', prompt=prompt, enrichedPrompt="Error: Invalid User Prompt Entered.", response="")
+    elif (prompt == ''):
+        return render_template('index.html', prompt=prompt, enrichedPrompt="Error: Invalid User Prompt Entered.", response="")
+    else:
+        enrichedPrompt = "Returned Enriched Prompt for " + str(prompt)
+        return render_template('index.html', prompt=prompt, enrichedPrompt=enrichedPrompt, response="")
+    
 @app.route('/getResponse', methods=['POST'])
 def getResponse():
     print("GET RESPONSE")
 
     prompt = request.form['promptId']
+    enrichedPrompt = request.form['enrichedPromptId']
 
-    if (prompt == None):
+    if (enrichedPrompt == None):
         return render_template('index.html', response="Error: Invalid User Prompt Entered.")
-    elif (prompt == ''):
-        return render_template('index.html', response="Error: Invalid User Prompt Entered.")
+    elif (enrichedPrompt == ''):
+        return render_template('index.html', prompt=prompt, enrichedPrompt=enrichedPrompt, response="Error: Invalid User Prompt Entered.")
     else:
-        response = "Returned Response for " + str(prompt)
-        return render_template('index.html', prompt=prompt, response=response)
+        response = "Returned AI Response for " + str(enrichedPrompt)
+        return render_template('index.html', prompt=prompt, enrichedPrompt=enrichedPrompt, response=response)
 
 @app.route('/save', methods=['POST'])
 def save():
@@ -149,16 +170,16 @@ def load():
         results = db.fetchall()
 
     # shorten record output
-    # cutoff = 100
+    cutoff = 200
     for i, record in enumerate(results):
-        # prompt = record[1]
-        # response = record[2]
-        # lengthRecord = len(prompt) + len(response)
-        # if lengthRecord > cutoff:
-        #     results[i] = str(record)[0:cutoff] + "..."
-        # else:
-        #     results[i] = str(record)[0:-2] + "..."
-        results[i] = str(record)
+        prompt = record[1]
+        response = record[2]
+        lengthRecord = len(prompt) + len(response)
+        if lengthRecord > cutoff:
+            results[i] = str(record)[0:cutoff] + "..."
+        else:
+            results[i] = str(record)[0:-2] + "..."
+        # results[i] = str(record)
     
     return render_template('modalLoad.html', results=results)
 
@@ -184,6 +205,11 @@ def loadItem(id):
     response=record[2][2:-2]
 
     return render_template('index.html', prompt=prompt, response=response)
+
+@app.route('/resetInput', methods=['GET'])
+def resetInput():
+    print('RESET Input')
+    return render_template('index.html', prompt="", response="")
 
 @app.route('/resetDB', methods=['POST'])
 def reset():
