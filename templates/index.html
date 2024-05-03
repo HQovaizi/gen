@@ -1,141 +1,154 @@
-<form id="formId" hx-swap="outerHTML settle:2s">
+<form id="formId" hx-swap="outerHTML">
 
 	<!-- main container -->
-	<div class="conainer mx-auto px-10 py-5 mainContainerClass" style="width: 100%;">
+	<div class="conainer m-0 p-10 mainContainerClass">
 
-		<!-- search frequently used prompts -->
-		<button class="btn btn-warning" for="modalSearch" hx-get="/search" hx-target="#modalSearchId">Search Frequently Used
-			Prompts</button>
-		<div id="modalSearchId"></div>
+		<div role="tablist" class="tabs tabs-lifted tabs-lg">
 
-		<!-- categories / conditions -->
-		<div class="grid grid-cols-4 gap-3 mt-5 mb-5">
+			<!-- first tab -->
+			<input type="radio" name="my_tabs_name" role="tab" class="tab [--tab-bg:#364040] [--tab-border-color:#364040] text-primary" style="width:200px;" aria-label="Generic" checked/>
+			<div role="tabpanel" class="tab-content bg-slate-600 border-base-300 rounded-box m-0 p-5" style="width:1000px;">
+				
+				<!-- prompt container -->
+				<div class="container promptContainerClass">
 
-			<!-- key categories -->
-			<div class="container mx-auto px-5 py-5 containerClass">
-				<p class="centerClass text-emerald-950">Key Categories</p>
-				<br>
-				<div class="grid grid-cols-1 gap-2 categoriesClass" id="categoriesId">
-					<input class="btn btn-outline text-emerald-950" id="btnTransaction" aria-label="Transaction" type="checkbox" hx-post="/edit/Transaction" hx-target="#formId" hx-swap="outerHTML" />
-					<input class="btn btn-outline text-emerald-950" id="btnHoldings" aria-label="Holdings" type="checkbox" hx-post="/edit/Holdings" hx-target="#formId" hx-swap="outerHTML" />
-					<input class="btn btn-outline text-emerald-950" id="btnMasterSecurityData" aria-label="MasterSecurityData" type="checkbox" hx-post="/edit/MasterSecurityData" hx-target="#formId" hx-swap="outerHTML" />
-					<input class="btn btn-outline text-emerald-950" id="btnPerformance" aria-label="Performance" type="checkbox" hx-post="/edit/Performance" hx-target="#formId" hx-swap="outerHTML" />
-					<input class="btn btn-outline text-emerald-950" id="btnClient" aria-label="Client" type="checkbox" hx-post="/edit/Client" hx-target="#formId" hx-swap="outerHTML" />
-					<input class="btn btn-outline text-emerald-950" id="btnAccount" aria-label="Account" type="checkbox" hx-post="/edit/Account" hx-target="#formId" hx-swap="outerHTML" />
-					<input class="btn btn-outline text-emerald-950" id="btnPortfolio" aria-label="Portfolio" type="checkbox" hx-post="/edit/Portfolio" hx-target="#formId" hx-swap="outerHTML" />
-					<input class="btn btn-outline text-emerald-950" id="btnInsurance" aria-label="Insurance" type="checkbox" hx-post="/edit/Insurance" hx-target="#formId" hx-swap="outerHTML" />
-				</div>
+						<!-- prompts -->
+						<div class="promptClass">
+							<textarea class="textarea textarea-info" id="promptId" name="promptId" placeholder="User Input..." style="font-size: 18px; resize: none; overflow: auto; color: black; background-color: white; border-radius: 15px" rows="6" cols="90">{{ prompt }}</textarea>
+							<br><br>
+							
+							<button class="btn btn-lg btn-warning" hx-post="/getEnrichedPrompt" hx-target="#formId">Enriched Requirement</button>
+							<br><br>
+							<textarea class="textarea textarea-info" id="enrichedPromptId" name="enrichedPromptId" placeholder="Enriched Requirement..." style="font-size: 18px; resize: none; overflow: auto; color: black; background-color: white; border-radius: 15px" rows="5" cols="90">{{ enrichedPrompt }}</textarea>
+							<br><br>
+						</div> <!-- prompts -->
+
+					</div> <!-- prompt container -->
 			</div>
-
-			<!-- sub categories -->
-			<div class="container mx-auto px-5 py-5 containerClass">
-				<p class="centerClass text-emerald-950">Sub Categories</p>
-				<br>
-				<div class="grid grid-cols-1 gap-2 categoriesClass" id="subCategoriesId">
-					<button class="btn btn-outline" id="btnPHId" style="color:black;" disabled>Select A Key Category</button>
-				</div>
-			</div>
-
-			<!-- filter conditions -->
-			<div class="container mx-auto px-5 py-5 containerClass">
-				<p class="centerClass text-emerald-950">Filter Conditions</p>
-				<br>
-				<div class="grid grid-cols-1 gap-2 categoriesClass">
-					<input class="btn btn-outline text-emerald-950" id="btnRealtime" aria-label="Realtime" type="checkbox" hx-get="/edit/Realtime" hx-target="#formId" hx-swap="outerHTML" />
-					<input class="btn btn-outline text-emerald-950" id="btnHistorical" aria-label="Historical" type="checkbox" hx-get="/edit/Historical" hx-target="#formId" hx-swap="outerHTML" />
-					<input class="btn btn-outline text-emerald-950" id="btnAsOfPreviousDay" aria-label="As Of Previous Day" type="checkbox" hx-get="/edit/AsOfPreviousDay" hx-target="#formId" hx-swap="outerHTML" />
-					<input class="btn btn-outline text-emerald-950" id="btnShadow" aria-label="Shadow" type="checkbox" hx-get="/edit/Shadow" hx-target="#formId" hx-swap="outerHTML" />
-				</div>
-			</div>
-
-			<!-- conditions -->
-			<div class="container mx-auto px-5 py-5 containerClass">
-				<p class="centerClass text-emerald-950">Conditions</p>
-				<br>
-				<div class="grid grid-cols-1 gap-2 categoriesClass">
-					<input class="btn btn-outline text-emerald-950" id="btnInclude" aria-label="Include" type="checkbox" hx-get="/edit/Include" hx-target="#formId" hx-swap="outerHTML" />
-					<input class="btn btn-outline text-emerald-950" id="btnExclude" aria-label="Exclude" type="checkbox" hx-get="/edit/Exclude" hx-target="#formId" hx-swap="outerHTML" />
-					<input class="btn btn-outline text-emerald-950" id="btnAnd" aria-label="And" type="checkbox" hx-get="/edit/And" hx-target="#formId" hx-swap="outerHTML" />
-					<input class="btn btn-outline text-emerald-950" id="btnOr" aria-label="Or" type="checkbox" hx-get="/edit/Or" hx-target="#formId" hx-swap="outerHTML" />
-				</div>
-			</div>
-
-		</div> <!-- categories / conditions -->
-
-		<!-- added conditions -->
-		<div class="grid grid-cols-3 gap-1 my-0 gridConditionsClass">
-
-			<!-- NFRs -->
-			<div class="container mx-2 my-1 px-3 py-1 containerConditionsClass">
-				<label class="leftClass text-emerald-950" for="nfrs">NFRs</label><br>
-				<textarea class="textarea textarea-accent text-blue-950/75" id="nfrsId" onfocusout="updateUserPromptCondition('nfrsId')" rows="3" cols="30" style="font-size: 18px; resize: none; overflow: auto; background-color: white;">10 min</textarea><br>
-			</div>
-
-			<!-- boundary conditions -->
-			<div class="container mx-2 my-1 px-3 py-1 containerConditionsClass">
-				<label class="leftClass text-emerald-950" for="boundaryConditions">Boundary Conditions</label><br>
-				<textarea class="textarea textarea-accent text-blue-950/75" id="boundaryConditionsId" onfocusout="updateUserPromptCondition('boundaryConditionsId')" rows="3" cols="30" style="font-size: 18px; resize: none; overflow: auto; background-color: white;">not more than 10000</textarea>
-			</div>
-
-			<!-- reset input -->
-			<div class="container mx-10 pl-5 pt-12 containerConditionsClass">
-				<button class="btn btn-lg btn-error" id="btnResetId" hx-get="/resetInput" hx-target="#formId" hx-swap="outerHTML">Reset Input</button>
-			</div>
-
-		</div> <!-- added conditions -->
-
-		<!-- divider -->
-		<div class="flex flex-col w-full"><div class="divider divider-neutral"></div></div>
-
-		<!-- prompt container -->
-		<div class="container mx-auto my-3 px-auto promptContainerClass">
-
-			<div class="grid grid-cols-2 gap-2">
-
-				<!-- prompt -->
-				<div class="promptClass">
-					<button class="btn btn-lg btn-accent">Generate User Prompt</button>
-					<br><br>
-					<textarea class="textarea textarea-info" id="promptId" name="promptId" placeholder="User Prompt..." style="font-size: 18px; resize: none; overflow: auto; color: black; background-color: white; border-radius: 15px" rows="6" cols="45">{{ prompt }}</textarea>
-					<br><br>
-					
-					<!-- first pass -->
-					<button class="btn btn-lg btn-warning" hx-post="/getEnrichedPrompt" hx-target="#formId">Generate Enriched Prompt</button>
-					<br><br>
-					<textarea class="textarea textarea-info" id="enrichedPromptId" name="enrichedPromptId" placeholder="Enriched Prompt..." style="font-size: 18px; resize: none; overflow: auto; color: black; background-color: white; border-radius: 15px" rows="5" cols="45">{{ enrichedPrompt }}</textarea>
-					<br><br>
-
-					<!-- initialize DB -->
-					<button class="btn btn-lg btn-secondary btn-outline btn-primary" hx-post="/resetDB" hx-target="#toastId">Reset DB</button>
-					<button class="btn btn-lg btn-secondary btn-outline btn-primary" hx-post="/dbDetails" hx-target="#formId">DB Details</button>
-					<button class="btn btn-lg btn-secondary btn-outline btn-primary" hx-post="/addPrompts" hx-target="#toastId">Add Prompts</button>
-					<br><br>
-
-					<span id="toastId"></span>
-				</div> <!-- prompt -->
-
-				<!-- response -->
-				<div class="responseClass">
-					<button class="btn btn-lg btn-primary" hx-post="/getResponse" hx-target="#formId">Generate AI Response</button>
-					<br><br>
-					<textarea class="textarea textarea-info" id="responseId" name="responseId" placeholder="AI Response..." style="padding:15px 5px; font-size: 18px; resize: none; overflow: auto; color: white; background-color: #364040; border-radius: 15px" rows="15" cols="42">{{ response }}</textarea>
-					<br>
-
-					<!-- database -->
-					<button class="btn btn-lg btn-success" hx-post="/save" hx-target="#toastId">Save</button>
-					<button class="btn btn-lg btn-primary" for="modalLoad" hx-get="/load" hx-target="#modalLoadId">Load</button>
-					<br>
-
-					<div id="modalLoadId"></div>
-
-				</div> <!-- response -->
-
-			</div>
-
-		</div> <!-- prompt container -->
 		
-		<!-- divider -->
-		<div class="flex flex-col w-full"><div class="divider divider-neutral"></div></div>
+			<!-- second tab -->
+			<input type="radio" name="my_tabs_name" role="tab" class="tab [--tab-bg:#364040] [--tab-border-color:#364040] text-primary" style="width:200px;" aria-label="Data Driven"/>
+			<div role="tabpanel" class="tab-content bg-slate-600 border-base-300 rounded-box m-0 p-5" style="width:1000px;">
+				
+				<div class="grid grid-cols-2 gap-0 m-0 p-0">
+				
+					<!-- prompt container -->
+					<div class="container promptContainerClass">
+
+						<!-- prompts -->
+						<div class="promptClass">
+							<button class="btn btn-lg btn-accent">User Input</button>
+							<br><br>
+							<textarea class="textarea textarea-info" id="promptId" name="promptId" placeholder="User Input..." style="font-size: 18px; resize: none; overflow: auto; color: black; background-color: white; border-radius: 15px" rows="6" cols="35">{{ prompt }}</textarea>
+							<br><br>
+							
+							<button class="btn btn-lg btn-warning" hx-post="/getEnrichedPrompt" hx-target="#formId">Enriched Requirement</button>
+							<br><br>
+							<textarea class="textarea textarea-info" id="enrichedPromptId" name="enrichedPromptId" placeholder="Enriched Requirement..." style="font-size: 18px; resize: none; overflow: auto; color: black; background-color: white; border-radius: 15px" rows="5" cols="35">{{ enrichedPrompt }}</textarea>
+							<br><br>
+						</div> <!-- prompts -->
+
+					</div> <!-- prompt container -->
+
+					<!-- categories / conditions -->
+					<div class="grid grid-cols-3 gap-0">
+
+						<!-- key categories -->
+						<div class="container mr-3 px-1 py-1 containerClass">
+							<p class="centerClass text-emerald-950">Key Categories</p>
+							<br>
+							<div class="grid grid-cols-1 gap-1 categoriesClass" id="categoriesId">
+								<input class="btn btn-outline text-emerald-950" id="btnTransaction" aria-label="Transaction" type="checkbox" hx-post="/edit/Transaction" hx-target="#formId" hx-swap="outerHTML" />
+								<input class="btn btn-outline text-emerald-950" id="btnHoldings" aria-label="Holdings" type="checkbox" hx-post="/edit/Holdings" hx-target="#formId" hx-swap="outerHTML" />
+								<input class="btn btn-outline text-emerald-950" id="btnMasterSecurityData" aria-label="MasterSecurityData" type="checkbox" hx-post="/edit/MasterSecurityData" hx-target="#formId" hx-swap="outerHTML" />
+								<input class="btn btn-outline text-emerald-950" id="btnPerformance" aria-label="Performance" type="checkbox" hx-post="/edit/Performance" hx-target="#formId" hx-swap="outerHTML" />
+								<input class="btn btn-outline text-emerald-950" id="btnClient" aria-label="Client" type="checkbox" hx-post="/edit/Client" hx-target="#formId" hx-swap="outerHTML" />
+								<input class="btn btn-outline text-emerald-950" id="btnAccount" aria-label="Account" type="checkbox" hx-post="/edit/Account" hx-target="#formId" hx-swap="outerHTML" />
+								<input class="btn btn-outline text-emerald-950" id="btnPortfolio" aria-label="Portfolio" type="checkbox" hx-post="/edit/Portfolio" hx-target="#formId" hx-swap="outerHTML" />
+								<input class="btn btn-outline text-emerald-950" id="btnInsurance" aria-label="Insurance" type="checkbox" hx-post="/edit/Insurance" hx-target="#formId" hx-swap="outerHTML" />
+							</div>
+						</div>
+
+						<!-- sub categories -->
+						<div class="container mx-2 px-1 py-1 containerClass">
+							<p class="centerClass text-emerald-950">Sub Categories</p>
+							<br>
+							<div class="grid grid-cols-1 gap-1 categoriesClass" id="subCategoriesId">
+								<button class="btn btn-outline" id="btnPHId" style="color:black;" disabled>Select A Key Category</button>
+							</div>
+						</div>
+
+						<!-- filter conditions -->
+						<div class="container ml-3 px-1 p-1 containerClass">
+							<p class="centerClass text-emerald-950">Filter Conditions</p>
+							<br>
+							<div class="grid grid-cols-1 gap-2 categoriesClass">
+								<input class="btn btn-outline text-emerald-950" id="btnRealtime" aria-label="Realtime" type="checkbox" hx-get="/edit/Realtime" hx-target="#formId" hx-swap="outerHTML" />
+								<input class="btn btn-outline text-emerald-950" id="btnHistorical" aria-label="Historical" type="checkbox" hx-get="/edit/Historical" hx-target="#formId" hx-swap="outerHTML" />
+								<input class="btn btn-outline text-emerald-950" id="btnAsOfPreviousDay" aria-label="As Of Previous Day" type="checkbox" hx-get="/edit/AsOfPreviousDay" hx-target="#formId" hx-swap="outerHTML" />
+								<input class="btn btn-outline text-emerald-950" id="btnShadow" aria-label="Shadow" type="checkbox" hx-get="/edit/Shadow" hx-target="#formId" hx-swap="outerHTML" />
+							</div>
+						</div>
+
+						<!-- conditions -->
+						<!-- <div class="container px-1 py-1 containerClass">
+							<p class="centerClass text-emerald-950">Conditions</p>
+							<br>
+							<div class="grid grid-cols-1 gap-2 categoriesClass">
+								<input class="btn btn-outline text-emerald-950" id="btnInclude" aria-label="Include" type="checkbox" hx-get="/edit/Include" hx-target="#formId" hx-swap="outerHTML" />
+								<input class="btn btn-outline text-emerald-950" id="btnExclude" aria-label="Exclude" type="checkbox" hx-get="/edit/Exclude" hx-target="#formId" hx-swap="outerHTML" />
+								<input class="btn btn-outline text-emerald-950" id="btnAnd" aria-label="And" type="checkbox" hx-get="/edit/And" hx-target="#formId" hx-swap="outerHTML" />
+								<input class="btn btn-outline text-emerald-950" id="btnOr" aria-label="Or" type="checkbox" hx-get="/edit/Or" hx-target="#formId" hx-swap="outerHTML" />
+							</div>
+						</div> -->
+
+						<!-- added conditions -->
+						<div class="grid grid-cols-1 gap-1 m-0 p-0 gridConditionsClass">
+
+							<!-- NFRs -->
+							<div class="container m-0 p-0 containerConditionsClass">
+								<label class="leftClass text-emerald-950" for="nfrs" style="color:rgb(210, 210, 210);">NFRs</label><br>
+								<textarea class="textarea textarea-accent text-blue-950/75" id="nfrsId" onfocusout="updateUserPromptCondition('nfrsId')" rows="3" cols="30" style="font-size: 18px; resize: none; overflow: auto; background-color: white;">10 min</textarea><br>
+							</div>
+
+							<!-- boundary conditions -->
+							<div class="container mx-0 my-0 px-0 py-0 containerConditionsClass">
+								<label class="leftClass text-emerald-950" for="boundaryConditions" style="color:rgb(210, 210, 210);">Boundary Conditions</label><br>
+								<textarea class="textarea textarea-accent text-blue-950/75" id="boundaryConditionsId" onfocusout="updateUserPromptCondition('boundaryConditionsId')" rows="3" cols="30" style="font-size: 18px; resize: none; overflow: auto; background-color: white;">not more than 10000</textarea>
+							</div>
+							<br>
+
+						</div> <!-- added conditions -->
+
+					</div> <!-- categories / conditions -->
+				</div>
+
+			</div>
+
+			<!-- third tab -->
+			<input type="radio" name="my_tabs_name" role="tab" class="tab [--tab-bg:#364040] [--tab-border-color:#364040] text-primary" style="width:200px;" aria-label="WIP"/>
+			<div role="tabpanel" class="tab-content bg-slate-600 border-base-300 rounded-box m-0 p-5" style="width:1000px;">
+				
+				<!-- prompt container -->
+				<div class="container promptContainerClass">
+
+						<!-- prompts -->
+						<div class="promptClass">
+							<button class="btn btn-lg btn-accent">User Input</button>
+							<br><br>
+							<textarea class="textarea textarea-info" id="promptId" name="promptId" placeholder="User Input..." style="font-size: 18px; resize: none; overflow: auto; color: black; background-color: white; border-radius: 15px" rows="6" cols="80">{{ prompt }}</textarea>
+							<br><br>
+							
+							<button class="btn btn-lg btn-warning" hx-post="/getEnrichedPrompt" hx-target="#formId">Enriched Requirement</button>
+							<br><br>
+							<textarea class="textarea textarea-info" id="enrichedPromptId" name="enrichedPromptId" placeholder="Enriched Requirement..." style="font-size: 18px; resize: none; overflow: auto; color: black; background-color: white; border-radius: 15px" rows="5" cols="80">{{ enrichedPrompt }}</textarea>
+							<br><br>
+						</div> <!-- prompts -->
+
+					</div> <!-- prompt container -->
+			</div>
+
+		</div> <!-- tab list -->
 
 	</div> <!-- main container -->
 

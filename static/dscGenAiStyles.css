@@ -1,3 +1,7 @@
+.container::-webkit-scrollbar { 
+    display: none;
+}
+
 body {
     font-weight: bold;
     /* color: black; */
@@ -16,37 +20,38 @@ body {
     text-align: left;
 }
 
-.mainContainerClass {
-    width: 100%;
+/* .mainContainerClass { */
+    /* width: 100%; */
     /* border: 2px solid #640000 */
-}
+/* } */
 
 .containerClass {
+    min-width:150px;
     height: 325px;
     background-color: #dfe7e7;
     overflow: auto;
     border-radius: 15px;
-    border: 2px solid hwb(193 44% 24%);
+    border: 2px solid #70b0c2;
 }
 
 .inputClass {
     color: black;
 }
 
-.gridConditionsClass {
-    height: 180;
+/* .gridConditionsClass { */
     /* border: 3px solid rgb(113,177,194); */
+    /* height: 180px; */
     /* overflow: auto; */
     /* border-radius: 15px; */
-}
+/* } */
 
-.containerConditionsClass {
-    width: 175px;
-    height: 170px;
+/* .containerConditionsClass { */
+    /* width: 175px; */
+    /* height: 170px; */
     /* border: 3px solid rgb(113,177,194); */
     /* overflow: auto; */
     /* border-radius: 15px; */
-}
+/* } */
 
 .textAreaClass {
     font-size: 18px;
@@ -58,7 +63,7 @@ body {
     /* border: 3px solid rgb(113,177,194); */
 }
 
-/* .promptContainerClass {
+/*.promptContainerClass {
     border: 2px solid rgb(0,100,0)
 } */
 
